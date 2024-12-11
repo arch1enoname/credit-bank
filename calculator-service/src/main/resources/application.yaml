@@ -1,0 +1,9 @@
+base:
+  interest:
+    rate: 20
+insurance:
+  cost: 100000
+  discount: 3
+salary:
+  client:
+    discount: 1
