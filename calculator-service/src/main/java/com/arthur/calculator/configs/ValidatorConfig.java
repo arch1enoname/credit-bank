@@ -1,6 +1,5 @@
 package com.arthur.calculator.configs;
 
-import com.arthur.calculator.dtos.ScoringDataDto;
 import com.arthur.calculator.utils.ScoringDataValidator;
 import com.arthur.calculator.validators.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
