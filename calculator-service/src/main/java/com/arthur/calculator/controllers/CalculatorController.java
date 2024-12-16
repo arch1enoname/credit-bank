@@ -1,9 +1,6 @@
 package com.arthur.calculator.controllers;
 
-import com.arthur.calculator.dtos.CreditDto;
-import com.arthur.calculator.dtos.LoanOfferDto;
-import com.arthur.calculator.dtos.LoanStatementRequestDto;
-import com.arthur.calculator.dtos.ScoringDataDto;
+import com.arthur.calculator.dtos.*;
 import com.arthur.calculator.exceptions.CalculatorException;
 import com.arthur.calculator.services.impl.CalculatorServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;

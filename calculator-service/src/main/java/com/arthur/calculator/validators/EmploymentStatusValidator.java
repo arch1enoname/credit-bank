@@ -1,7 +1,6 @@
 package com.arthur.calculator.validators;
 
-import com.arthur.calculator.dtos.CreditDto;
-import com.arthur.calculator.dtos.ScoringDataDto;
+import com.arthur.calculator.dtos.*;
 import com.arthur.calculator.exceptions.CalculatorException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -18,13 +17,13 @@ public class EmploymentStatusValidator implements Validator {
         switch (scoringDataDto.getEmployment().getEmploymentStatus()) {
             case UNEMPLOYED:
                 throw new CalculatorException("Безработный");
-            case FREELANCE:
+            case SELF_EMPLOYED:
                 creditDto.setRate(creditDto.getRate().add(BigDecimal.valueOf(2)));
                 break;
             case BUSINESS_OWNER:
                 creditDto.setRate(creditDto.getRate().add(BigDecimal.valueOf(1)));
                 break;
-            case FULL_TIME:
+            case EMPLOYED:
                 break;
             default:
                 throw new CalculatorException("Несуществующий статус");

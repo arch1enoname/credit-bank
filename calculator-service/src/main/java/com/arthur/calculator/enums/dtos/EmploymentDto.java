@@ -1,4 +1,4 @@
-package com.arthur.calculator.dtos;
+package com.arthur.calculator.enums.dtos;
 
 import com.arthur.calculator.enums.EmploymentPosition;
 import com.arthur.calculator.enums.EmploymentStatus;
