@@ -25,5 +25,4 @@ public class ScoringDataValidator {
             validator.validate(scoringDataDto, creditDto);
         }
     }
-
 }
