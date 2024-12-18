@@ -1,10 +1,10 @@
-package com.arthur.calculatorservice;
+package com.neoflex.creditbank.dealservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CalculatorServiceApplicationTests {
+class DealServiceApplicationTests {
 
     @Test
     void contextLoads() {
