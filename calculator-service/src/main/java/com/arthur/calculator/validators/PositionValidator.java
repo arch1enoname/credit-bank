@@ -14,12 +14,18 @@ public class PositionValidator implements Validator {
     @Override
     public void validate(ScoringDataDto scoringDataDto, CreditDto creditDto) throws CalculatorException {
         log.debug("Validating position");
-        switch (scoringDataDto.getEmployment().getPosition()) {
-            case MIDDLE_MANAGER:
+        switch (scoringDataDto.getEmployment().getEmploymentPosition()) {
+            case MID_MANAGER:
                 creditDto.setRate(creditDto.getRate().add(BigDecimal.valueOf(-2)));
                 break;
-            case SENIOR_MANAGER:
+            case TOP_MANAGER:
                 creditDto.setRate(creditDto.getRate().add(BigDecimal.valueOf(-3)));
+                break;
+            case OWNER:
+                creditDto.setRate(creditDto.getRate().add(BigDecimal.valueOf(-5)));
+                break;
+            case WORKER:
+                creditDto.setRate(creditDto.getRate().add(BigDecimal.valueOf(-1)));
                 break;
             default:
                 throw new CalculatorException("Несуществующая должность");

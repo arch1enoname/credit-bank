@@ -18,13 +18,13 @@ public class EmploymentStatusValidator implements Validator {
         switch (scoringDataDto.getEmployment().getEmploymentStatus()) {
             case UNEMPLOYED:
                 throw new CalculatorException("Безработный");
-            case FREELANCE:
+            case SELF_EMPLOYED:
                 creditDto.setRate(creditDto.getRate().add(BigDecimal.valueOf(2)));
                 break;
             case BUSINESS_OWNER:
                 creditDto.setRate(creditDto.getRate().add(BigDecimal.valueOf(1)));
                 break;
-            case FULL_TIME:
+            case EMPLOYED:
                 break;
             default:
                 throw new CalculatorException("Несуществующий статус");

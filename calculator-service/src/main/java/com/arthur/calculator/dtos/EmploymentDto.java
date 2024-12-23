@@ -1,7 +1,7 @@
 package com.arthur.calculator.dtos;
 
+import com.arthur.calculator.enums.EmploymentPosition;
 import com.arthur.calculator.enums.EmploymentStatus;
-import com.arthur.calculator.enums.Position;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
@@ -33,7 +33,7 @@ public class EmploymentDto {
 
     @NotNull(message = "position cannot be Null")
     @Schema(description = "Должность клиента", example = "ENGINEER")
-    private Position position;
+    private EmploymentPosition employmentPosition;
 
     @Min(value = 0, message = "workExperienceTotal must be at least 0")
     @Schema(description = "Общий стаж работы (в месяцах)", example = "120")

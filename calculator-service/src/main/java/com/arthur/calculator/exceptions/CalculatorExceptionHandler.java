@@ -17,7 +17,7 @@ public class CalculatorExceptionHandler {
     @ExceptionHandler(value = {CalculatorException.class})
     public ResponseEntity<Object> handleProjectNotFoundException(CalculatorException calculatorException) {
 
-        log.error("Credit exception occurred: ", calculatorException); // Логирование ошибки
+        log.error("Credit exception occurred: ", calculatorException);
 
         Exception exception = new Exception(
                 calculatorException.getMessage(),
