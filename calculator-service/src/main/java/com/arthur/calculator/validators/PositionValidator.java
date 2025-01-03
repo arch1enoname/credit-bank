@@ -26,6 +26,7 @@ public class PositionValidator implements Validator {
                 creditDto.setRate(creditDto.getRate().add(BigDecimal.valueOf(-5)));
                 break;
             case WORKER:
+                creditDto.setRate(creditDto.getRate().add(BigDecimal.valueOf(-1)));
                 break;
             default:
                 throw new CalculatorException("Несуществующая должность");
