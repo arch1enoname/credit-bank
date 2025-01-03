@@ -1,8 +1,7 @@
 package com.arthur.calculator.validators;
 
-import com.arthur.calculator.dtos.CreditDto;
-import com.arthur.calculator.dtos.ScoringDataDto;
 import com.arthur.calculator.exceptions.CalculatorException;
+import com.arthur.calculator.dtos.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

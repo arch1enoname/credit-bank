@@ -1,10 +1,6 @@
 package com.arthur.calculator.controllers;
 
-import com.arthur.calculator.dtos.CreditDto;
-import com.arthur.calculator.dtos.LoanOfferDto;
-import com.arthur.calculator.dtos.LoanStatementRequestDto;
-import com.arthur.calculator.dtos.ScoringDataDto;
-import com.arthur.calculator.exceptions.CalculatorException;
+import com.arthur.calculator.dtos.*;
 import com.arthur.calculator.services.impl.CalculatorServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -13,10 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -50,7 +43,7 @@ public class CalculatorController {
     public ResponseEntity<CreditDto> calculate(@Validated
                                                    @RequestBody
                                                    @Parameter(description = "Данные для оценки платежеспособности клиента", required = true)
-                                               ScoringDataDto scoringDataDto) throws CalculatorException {
+                                               ScoringDataDto scoringDataDto){
         log.info("Received loan offer request: {}", scoringDataDto);
         return ResponseEntity.ok(calculatorService.calculate(scoringDataDto));
     }
