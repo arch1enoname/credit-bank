@@ -41,7 +41,7 @@ public class CalculatorServiceImpl implements CalculatorService {
     public CreditDto calculate(ScoringDataDto scoringDataDto) throws CalculatorException {
         log.info("calculating scoring data");
         CreditDto creditDto = CreditDto.builder()
-                .rate(BASE_INTEREST_RATE)
+                .rate(BigDecimal.valueOf(20))
                 .term(scoringDataDto.getTerm())
                 .amount(scoringDataDto.getAmount())
                 .isInsuranceEnabled(scoringDataDto.getIsInsuranceEnabled())
@@ -92,8 +92,8 @@ public class CalculatorServiceImpl implements CalculatorService {
 
     public BigDecimal calculateMonthlyPayment(ScoringDataDto scoringDataDto, CreditDto creditDto) {
         log.debug("calculating monthly payment for scoring data");
-        BigDecimal annualRate = creditDto.getRate().divide(BigDecimal.valueOf(100), 10, RoundingMode.HALF_UP); // Перевод процентов в доли
-        BigDecimal monthlyRate = annualRate.divide(BigDecimal.valueOf(12), 10, RoundingMode.HALF_UP); // Годовая ставка -> месячная
+        BigDecimal annualRate = creditDto.getRate().divide(BigDecimal.valueOf(100), 10, RoundingMode.HALF_UP);
+        BigDecimal monthlyRate = annualRate.divide(BigDecimal.valueOf(12), 10, RoundingMode.HALF_UP);
         BigDecimal onePlusRatePowN = monthlyRate.add(BigDecimal.ONE).pow(scoringDataDto.getTerm());
         BigDecimal numerator = monthlyRate.multiply(onePlusRatePowN);
         BigDecimal denominator = onePlusRatePowN.subtract(BigDecimal.ONE);

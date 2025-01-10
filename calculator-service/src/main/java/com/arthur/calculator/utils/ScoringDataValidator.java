@@ -3,16 +3,11 @@ package com.arthur.calculator.utils;
 
 import com.arthur.calculator.dtos.CreditDto;
 import com.arthur.calculator.dtos.ScoringDataDto;
-import com.arthur.calculator.enums.Gender;
-import com.arthur.calculator.exceptions.CalculatorException;
-import com.arthur.calculator.validators.Validator;
+import com.arthur.calculator.utils.validators.Validator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.List;
 
 
