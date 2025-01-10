@@ -1,7 +1,5 @@
 package com.arthur.calculator.services.impl;
 
-
-
 import com.arthur.calculator.dtos.*;
 import com.arthur.calculator.exceptions.CalculatorException;
 import com.arthur.calculator.services.CalculatorService;
@@ -97,10 +95,9 @@ public class CalculatorServiceImpl implements CalculatorService {
         BigDecimal onePlusRatePowN = monthlyRate.add(BigDecimal.ONE).pow(scoringDataDto.getTerm());
         BigDecimal numerator = monthlyRate.multiply(onePlusRatePowN);
         BigDecimal denominator = onePlusRatePowN.subtract(BigDecimal.ONE);
-        BigDecimal monthlyPayment = scoringDataDto.getAmount()
+        return scoringDataDto.getAmount()
                 .multiply(numerator)
                 .divide(denominator, 2, RoundingMode.HALF_UP);
-        return monthlyPayment;
     }
 
 
@@ -151,5 +148,4 @@ public class CalculatorServiceImpl implements CalculatorService {
     private BigDecimal calculateRemainingDebt(BigDecimal remainingDebt, BigDecimal debtPayment) {
         return remainingDebt.subtract(debtPayment).setScale(2, RoundingMode.HALF_UP);
     }
-
 }
