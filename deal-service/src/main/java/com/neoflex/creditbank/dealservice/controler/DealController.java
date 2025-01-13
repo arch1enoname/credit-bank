@@ -14,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -74,4 +75,17 @@ public class DealController {
         dealService.calculateLoan(finishRegistrationRequestDto, statementId);
         return ResponseEntity.ok().build();
     }
+
+    @PostMapping("/document/{statementId}/send")
+    public ResponseEntity<Void> sendDocuments(@PathVariable String statementId) {
+        dealService.sendDocuments(statementId);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/document/{statementId}/sign")
+    public ResponseEntity<Void> signDocuments(@PathVariable String statementId) {
+        dealService.signDocuments(statementId);
+        return ResponseEntity.ok().build();
+    }
+
 }

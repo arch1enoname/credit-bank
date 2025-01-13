@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/changeset/create-client-table.xml
+  - include:
+      file: db/changelog/changeset/create-credit-table.xml
+  - include:
+      file: db/changelog/changeset/create-statement-table.xml
