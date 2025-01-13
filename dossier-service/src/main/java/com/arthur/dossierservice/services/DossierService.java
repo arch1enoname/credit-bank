@@ -19,7 +19,7 @@ public class DossierService {
     final String ADDRESS = "artur132003@gmail.com";
     final String SMTP_PORT = "465";
     final String TO = "ratmuh2809@gmail.com";
-    final String password = "xsgy kaef zamo sgvb";
+    final String password = "password";
 
     @Autowired
     public DossierService(JavaMailSender mailSender) {
