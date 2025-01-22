@@ -32,7 +32,7 @@ public class StatementServiceImpl implements StatementService {
     @Override
     public List<Statement> getAllStatements() {
         log.info("Fetching all statements.");
-        return List.of();
+        return statementRepository.findAll();
     }
 
     @Override

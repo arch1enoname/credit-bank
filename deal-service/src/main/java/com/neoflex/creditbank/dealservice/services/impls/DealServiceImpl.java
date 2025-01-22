@@ -25,15 +25,18 @@ public class DealServiceImpl implements DealService {
     private final ClientServiceImpl clientService;
     private final CalculatorServiceClient calculatorServiceClient;
     private final CreditServiceImpl creditService;
-    private final KafkaTemplate<String, EmailMessageDto> kafkaTemplate;
+    private final  KafkaSenderService kafkaSenderService;
 
-    @Autowired
-    public DealServiceImpl(StatementServiceImpl statementService, ClientServiceImpl clientService, CalculatorServiceClient calculatorServiceClient, CreditServiceImpl creditService, KafkaTemplate<String, EmailMessageDto> kafkaTemplate) {
+    public DealServiceImpl(StatementServiceImpl statementService,
+                           ClientServiceImpl clientService,
+                           CalculatorServiceClient calculatorServiceClient,
+                           CreditServiceImpl creditService,
+                           KafkaSenderService kafkaSenderService) {
         this.statementService = statementService;
         this.clientService = clientService;
         this.calculatorServiceClient = calculatorServiceClient;
         this.creditService = creditService;
-        this.kafkaTemplate = kafkaTemplate;
+        this.kafkaSenderService = kafkaSenderService;
     }
 
     @Override
@@ -72,7 +75,7 @@ public class DealServiceImpl implements DealService {
                 .statementId(statement.getStatementId())
                 .build();
 
-        kafkaTemplate.send("finish-registration", emailMessageDto);
+        kafkaSenderService.sendMessage("finish-registration", emailMessageDto);
 
         log.info("Successfully updated statement with selected LoanOfferDto: {}", loanOfferDto);
     }
@@ -142,7 +145,7 @@ public class DealServiceImpl implements DealService {
                 .address("ratmuh2809@gmail.com")
                 .statementId(statement.getStatementId())
                 .build();
-        kafkaTemplate.send("send-documents", emailMessageDto);
+        kafkaSenderService.sendMessage("send-documents", emailMessageDto);
     }
 
     public void signDocuments(String statementId) {
@@ -153,6 +156,6 @@ public class DealServiceImpl implements DealService {
                 .address("ratmuh2809@gmail.com")
                 .statementId(statement.getStatementId())
                 .build();
-        kafkaTemplate.send("sign-documents", emailMessageDto);
+        kafkaSenderService.sendMessage("sign-documents", emailMessageDto);
     }
 }

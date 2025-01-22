@@ -37,31 +37,37 @@ public class DossierService {
 
     @KafkaListener(topics = "finish-registration", groupId = "group1")
     public void finishRegistration(EmailMessageDto emailMessageDto) {
+        System.out.println(emailMessageDto);
         sendMessage(emailMessageDto);
     }
 
     @KafkaListener(topics = "send-documents", groupId = "group1")
     public void sendDocuments(EmailMessageDto emailMessageDto) {
+        System.out.println(emailMessageDto);
         sendMessage(emailMessageDto);
     }
 
     @KafkaListener(topics = "send-ses", groupId = "group1")
     public void sendSes(EmailMessageDto emailMessageDto) {
+        System.out.println(emailMessageDto);
         sendMessage(emailMessageDto);
     }
 
     @KafkaListener(topics = "credit-issued", groupId = "group1")
     public void creditIssued(EmailMessageDto emailMessageDto) {
+        System.out.println(emailMessageDto);
         sendMessage(emailMessageDto);
     }
 
     @KafkaListener(topics = "statement-denied", groupId = "group1")
     public void statementDenied(EmailMessageDto emailMessageDto) {
+        System.out.println(emailMessageDto);
         sendMessage(emailMessageDto);
     }
 
     @KafkaListener(topics = "create-document", groupId = "group1")
     public void createDocument(EmailMessageDto emailMessageDto) {
+        System.out.println(emailMessageDto);
         sendMessage(emailMessageDto);
     }
 }
