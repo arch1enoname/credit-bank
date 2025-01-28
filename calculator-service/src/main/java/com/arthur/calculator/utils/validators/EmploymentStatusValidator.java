@@ -1,4 +1,4 @@
-package com.arthur.calculator.validators;
+package com.arthur.calculator.utils.validators;
 
 import com.arthur.calculator.dtos.*;
 import com.arthur.calculator.exceptions.CalculatorException;

@@ -5,10 +5,13 @@ import com.neoflex.creditbank.dealservice.entities.Client;
 import com.neoflex.creditbank.dealservice.entities.Statement;
 import com.neoflex.creditbank.dealservice.enums.ApplicationStatus;
 import com.neoflex.creditbank.dealservice.enums.ChangeType;
+import com.neoflex.creditbank.dealservice.enums.EmailTheme;
 import com.neoflex.creditbank.dealservice.services.CalculatorServiceClient;
 import com.neoflex.creditbank.dealservice.services.DealService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.common.metrics.Stat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,13 +25,18 @@ public class DealServiceImpl implements DealService {
     private final ClientServiceImpl clientService;
     private final CalculatorServiceClient calculatorServiceClient;
     private final CreditServiceImpl creditService;
+    private final  KafkaSenderService kafkaSenderService;
 
-    @Autowired
-    public DealServiceImpl(StatementServiceImpl statementService, ClientServiceImpl clientService, CalculatorServiceClient calculatorServiceClient, CreditServiceImpl creditService) {
+    public DealServiceImpl(StatementServiceImpl statementService,
+                           ClientServiceImpl clientService,
+                           CalculatorServiceClient calculatorServiceClient,
+                           CreditServiceImpl creditService,
+                           KafkaSenderService kafkaSenderService) {
         this.statementService = statementService;
         this.clientService = clientService;
         this.calculatorServiceClient = calculatorServiceClient;
         this.creditService = creditService;
+        this.kafkaSenderService = kafkaSenderService;
     }
 
     @Override
@@ -59,6 +67,16 @@ public class DealServiceImpl implements DealService {
         log.debug("Retrieved statement for LoanOfferDto: {}", statement);
 
         statementService.updateStatement(statement, loanOfferDto);
+
+        EmailMessageDto emailMessageDto = EmailMessageDto.builder()
+                .text("Вы выбрали оффер")
+                .theme(EmailTheme.FINISH_REGISTRATION)
+                .address("ratmuh2809@gmail.com")
+                .statementId(statement.getStatementId())
+                .build();
+
+        kafkaSenderService.sendMessage("finish-registration", emailMessageDto);
+
         log.info("Successfully updated statement with selected LoanOfferDto: {}", loanOfferDto);
     }
 
@@ -117,5 +135,27 @@ public class DealServiceImpl implements DealService {
         }
 
         log.info("Successfully filled ScoringDataDto with client data: {}", scoringDataDto);
+    }
+
+    public void sendDocuments(String statementId) {
+        Statement statement = statementService.getStatementById(UUID.fromString(statementId));
+        EmailMessageDto emailMessageDto = EmailMessageDto.builder()
+                .text("Запрос на отправку документов")
+                .theme(EmailTheme.SEND_DOCUMENTS)
+                .address("ratmuh2809@gmail.com")
+                .statementId(statement.getStatementId())
+                .build();
+        kafkaSenderService.sendMessage("send-documents", emailMessageDto);
+    }
+
+    public void signDocuments(String statementId) {
+        Statement statement = statementService.getStatementById(UUID.fromString(statementId));
+        EmailMessageDto emailMessageDto = EmailMessageDto.builder()
+                .text("Запрос на подписание документов")
+                .theme(EmailTheme.SIGN_DOCUMENTS)
+                .address("ratmuh2809@gmail.com")
+                .statementId(statement.getStatementId())
+                .build();
+        kafkaSenderService.sendMessage("sign-documents", emailMessageDto);
     }
 }

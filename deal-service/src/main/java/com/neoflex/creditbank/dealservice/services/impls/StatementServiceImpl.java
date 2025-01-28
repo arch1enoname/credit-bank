@@ -32,8 +32,7 @@ public class StatementServiceImpl implements StatementService {
     @Override
     public List<Statement> getAllStatements() {
         log.info("Fetching all statements.");
-        // Для отладки можно было бы добавить логирование результатов
-        return List.of();
+        return statementRepository.findAll();
     }
 
     @Override
